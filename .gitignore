@@ -5,6 +5,9 @@ node_modules/
 coverage
 *.lcov
 
+# claude worktrees
+.claude/worktrees/
+
 # Optional eslint cache
 .eslintcache
 
