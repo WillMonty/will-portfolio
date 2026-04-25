@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 
 type ThemeMode = 'light' | 'dark' | 'auto'
 
@@ -32,12 +32,11 @@ function applyThemeMode(mode: ThemeMode) {
 }
 
 export default function ThemeToggle() {
-  const [mode, setMode] = useState<ThemeMode>('auto')
+  const [mode, setMode] = useState<ThemeMode>(getInitialMode)
 
-  useEffect(() => {
-    const initialMode = getInitialMode()
-    setMode(initialMode)
-    applyThemeMode(initialMode)
+  useLayoutEffect(() => {
+    applyThemeMode(mode)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

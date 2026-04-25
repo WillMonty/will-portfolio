@@ -1,0 +1,44 @@
+---
+title: Type-safe routing without the ceremony
+date: 2026-04-17
+summary: TanStack Router generates route types automatically — here is what that actually feels like day-to-day.
+---
+
+Most routing libraries treat types as an afterthought. You get `string` params, untyped search params, and the occasional `any` to paper over the gap. TanStack Router takes the opposite approach: types are derived from your actual route tree at build time.
+
+## The route file is the source of truth
+
+Each route file exports a `Route` object. The router plugin reads those exports and generates `routeTree.gen.ts` — a complete type map of your app.
+
+```ts
+export const Route = createFileRoute('/blog/$slug')({
+  component: BlogPost,
+})
+
+function BlogPost() {
+  const { slug } = Route.useParams() // slug: string, always defined
+  // ...
+}
+```
+
+No generics to write, no type assertions. If you rename the file, the types update automatically on the next build.
+
+## Search params, typed
+
+Declare a validator on the route and search params become typed throughout the app:
+
+```ts
+export const Route = createFileRoute('/blog')({
+  validateSearch: (search) => ({
+    page: Number(search.page ?? 1),
+    tag: typeof search.tag === 'string' ? search.tag : undefined,
+  }),
+  component: Blog,
+})
+```
+
+Now `Route.useSearch()` returns `{ page: number; tag: string | undefined }`. Links that pass wrong search params are a type error.
+
+## Worth the dependency?
+
+Yes, for any app where navigation is non-trivial. The generator step adds a few hundred ms to the dev startup, and you get full end-to-end type safety on routing in return. For a site like this one it is perhaps overkill — but the ergonomics are genuinely better, and that matters for code you actually want to touch.

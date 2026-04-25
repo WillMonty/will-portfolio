@@ -1,0 +1,28 @@
+---
+title: Why I switched from SvelteKit to TanStack Start
+date: 2026-04-10
+summary: A look at the trade-offs between file-based SSR frameworks when building a personal site.
+---
+
+SvelteKit is a great framework. I used it happily for months. But when I started wanting tighter TypeScript integration — specifically type-safe routing with no extra ceremony — I started looking around.
+
+## What pushed me over the edge
+
+TanStack Router generates route types automatically from your file tree. No manual declarations, no magic strings, just autocomplete all the way down.
+
+```ts
+// This just works — slug is typed, not `string | undefined`
+const { slug } = Route.useParams()
+```
+
+With SvelteKit, you either write `$page.params.slug` (untyped by default) or reach for a plugin to generate types. Not bad, but not seamless.
+
+## SSR without the ceremony
+
+TanStack Start handles SSR through `createServerFn` — functions that run on the server and are automatically called during SSR. You co-locate data loading with the route that needs it, and the types flow through without any boilerplate.
+
+## The trade-off
+
+The TanStack ecosystem moves fast. Versions are `latest` in `package.json` because the APIs are still stabilizing. If you need battle-tested stability, SvelteKit is the safer bet today.
+
+For a personal site where I control the upgrades? TanStack Start wins for me.
