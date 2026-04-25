@@ -28,14 +28,23 @@ const PLACEHOLDER_POSTS = [
 
 function Blog() {
   return (
-    <main className="page-wrap px-4 pb-16 pt-14">
-      <section className="island-shell rise-in relative overflow-hidden rounded-[2rem] px-8 py-12 sm:px-14 sm:py-16">
-        <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(79,184,178,0.24),transparent_66%)]" />
+    <main className="page-wrap px-4 pt-14 pb-16">
+      <section className="
+        island-shell rise-in relative overflow-hidden rounded-4xl px-8 py-12
+        sm:px-14 sm:py-16
+      ">
+        <div className="
+          pointer-events-none absolute -top-20 -left-20 size-56 rounded-full
+          bg-[radial-gradient(circle,rgba(79,184,178,0.24),transparent_66%)]
+        " />
         <p className="island-kicker mb-4">Blog</p>
-        <h1 className="display-title mb-4 text-4xl font-bold tracking-tight text-[var(--sea-ink)] sm:text-5xl">
+        <h1 className="
+          display-title mb-4 text-4xl font-bold tracking-tight text-(--sea-ink)
+          sm:text-5xl
+        ">
           Writing
         </h1>
-        <p className="max-w-lg text-base text-[var(--sea-ink-soft)]">
+        <p className="max-w-lg text-base text-(--sea-ink-soft)">
           Posts on engineering, tooling, and whatever I'm currently obsessing
           over. Posts coming soon.
         </p>
@@ -45,16 +54,22 @@ function Blog() {
         {PLACEHOLDER_POSTS.map(({ slug, title, date, summary }, i) => (
           <article
             key={slug}
-            className="island-shell rise-in rounded-2xl p-6 sm:p-8"
+            className="
+              island-shell rise-in rounded-2xl p-6
+              sm:p-8
+            "
             style={{ animationDelay: `${i * 80 + 60}ms` }}
           >
             <div className="mb-3 flex flex-wrap items-center gap-3">
               <span className="island-kicker">{date}</span>
             </div>
-            <h2 className="display-title mb-2 text-xl font-bold text-[var(--sea-ink)] sm:text-2xl">
+            <h2 className="
+              display-title mb-2 text-xl font-bold text-(--sea-ink)
+              sm:text-2xl
+            ">
               {title}
             </h2>
-            <p className="m-0 text-sm text-[var(--sea-ink-soft)]">{summary}</p>
+            <p className="m-0 text-sm text-(--sea-ink-soft)">{summary}</p>
           </article>
         ))}
       </section>
