@@ -1,4 +1,4 @@
-import type { MDXProps } from 'mdx/types'
+import type { MDXProps } from "mdx/types"
 
 export interface PostFrontmatter {
   title: string
@@ -11,12 +11,15 @@ export interface PostModule {
   default: (props: MDXProps) => JSX.Element
 }
 
-const modules = import.meta.glob<PostModule>('../content/blog/*.mdx', {
+const modules = import.meta.glob<PostModule>("../content/blog/*.mdx", {
   eager: true,
 })
 
 function slugFromPath(path: string) {
-  return path.split('/').pop()!.replace(/\.mdx$/, '')
+  return path
+    .split("/")
+    .pop()!
+    .replace(/\.mdx$/, "")
 }
 
 export interface PostMeta extends PostFrontmatter {
@@ -31,7 +34,7 @@ export function getAllPosts(): PostMeta[] {
 
 export function getPost(slug: string): PostModule | undefined {
   const entry = Object.entries(modules).find(
-    ([path]) => slugFromPath(path) === slug,
+    ([path]) => slugFromPath(path) === slug
   )
   return entry?.[1]
 }

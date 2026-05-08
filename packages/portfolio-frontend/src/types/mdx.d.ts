@@ -1,5 +1,5 @@
-declare module '*.mdx' {
-  import type { MDXProps } from 'mdx/types'
+declare module "*.mdx" {
+  import type { MDXProps } from "mdx/types"
 
   export const frontmatter: {
     title: string

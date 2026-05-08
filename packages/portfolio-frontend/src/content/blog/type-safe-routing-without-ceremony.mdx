@@ -11,7 +11,7 @@ Most routing libraries treat types as an afterthought. You get `string` params, 
 Each route file exports a `Route` object. The router plugin reads those exports and generates `routeTree.gen.ts` — a complete type map of your app.
 
 ```ts
-export const Route = createFileRoute('/blog/$slug')({
+export const Route = createFileRoute("/blog/$slug")({
   component: BlogPost,
 })
 
@@ -28,10 +28,10 @@ No generics to write, no type assertions. If you rename the file, the types upda
 Declare a validator on the route and search params become typed throughout the app:
 
 ```ts
-export const Route = createFileRoute('/blog')({
+export const Route = createFileRoute("/blog")({
   validateSearch: (search) => ({
     page: Number(search.page ?? 1),
-    tag: typeof search.tag === 'string' ? search.tag : undefined,
+    tag: typeof search.tag === "string" ? search.tag : undefined,
   }),
   component: Blog,
 })
